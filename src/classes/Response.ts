@@ -5,6 +5,6 @@ export class ResponseHandler<T> implements ResponseT<T> {
 		public success: boolean,
 		public code: number,
 		public message: string,
-		public data: T | null
+		public data?: T
 	) {}
 }

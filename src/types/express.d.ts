@@ -1,7 +1,9 @@
 import { User } from "./api";
 
-declare namespace Express {
-	interface Request {
-		user: User;
+declare global {
+	namespace Express {
+		interface Request {
+			user: User;
+		}
 	}
 }

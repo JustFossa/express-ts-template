@@ -11,13 +11,17 @@ export const verifyToken = (
 	if (!token)
 		return res
 			.status(401)
-			.json(new ResponseHandler(false, 401, "No token provided", null));
+			.json(new ResponseHandler(false, 401, "No token provided"));
 
-	jwt.verify(token, process.env.JWT_SECRET as string, (err, decoded) => {
+	jwt.verify(token, process.env.JWT_SECRET as string, (err, decoded: any) => {
 		if (err)
 			return res
 				.status(401)
-				.json(new ResponseHandler(false, 401, "Unauthorized", null));
+				.json(new ResponseHandler(false, 401, "Unauthorized"));
+		if (!decoded)
+			return res
+				.status(401)
+				.json(new ResponseHandler(false, 401, "Unauthorized"));
 
 		req.user = decoded;
 	});
