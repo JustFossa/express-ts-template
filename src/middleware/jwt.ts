@@ -13,7 +13,7 @@ export const verifyToken = (
       .status(401)
       .json(new ResponseHandler(false, 401, "No token provided"));
 
-  jwt.verify(token, process.env.JWT_SECRET as string, (err, decoded: any) => {
+  jwt.verify(token, process.env.JWT_SECRET as string, (err, decoded) => {
     if (err)
       return res
         .status(401)
@@ -24,5 +24,6 @@ export const verifyToken = (
         .json(new ResponseHandler(false, 401, "Unauthorized"));
 
     req.user = decoded;
+    next();
   });
 };
